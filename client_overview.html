@@ -45,7 +45,7 @@
   .page-nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey); z-index: 100; padding: 0 56px; }
   .nav-inner { display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; }
   .nav-inner::-webkit-scrollbar { display: none; }
-  .nav-item { flex-shrink: 0; padding: 16px 20px; font-size: 12px; font-weight: 500; color: var(--grey-dark); text-decoration: none; letter-spacing: 0.3px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+  .nav-item { flex-shrink: 0; padding: 16px 20px; font-size: 12px; font-weight: 500; color: var(--grey-dark); text-decoration: none; letter-spacing: 0.3px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: var(--font); }
   @media (max-width: 549px) { .page-nav { padding: 0 20px; } .nav-inner { flex-direction: column; align-items: flex-start; overflow-x: visible; } .nav-item { padding: 12px 0; border-bottom: none; border-left: 2px solid transparent; padding-left: 12px; width: 100%; } .nav-item.active, .nav-item:hover { border-left-color: var(--purple); border-bottom-color: transparent; color: var(--navy); } }
   .nav-item:hover, .nav-item.active { color: var(--purple); border-color: var(--purple); }
 
@@ -523,6 +523,46 @@
     }, 500);
   });
 
+
+  function navTo(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const nav = document.querySelector('.page-nav');
+    const offset = nav ? nav.offsetHeight + 16 : 60;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    // Update active state
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelector(`.nav-item[onclick="navTo('${id}')"]`)?.classList.add('active');
+    // Update URL without reloading - makes section URL shareable
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('section', id);
+      history.pushState(null, '', url.toString());
+    } catch(e) {}
+  }
+
+  // On load - read ?section= and scroll to it after content settles
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get('section');
+    if (!section) return;
+    var lastHeight = 0;
+    var stable = 0;
+    var poll = setInterval(function() {
+      var h = document.body.scrollHeight;
+      if (h > 0 && h === lastHeight) {
+        stable++;
+        if (stable >= 3) {
+          clearInterval(poll);
+          navTo(section);
+        }
+      } else {
+        lastHeight = h;
+        stable = 0;
+      }
+    }, 250);
+  })();
 </script>
 </head>
 <body>
@@ -576,12 +616,12 @@
 <!-- NAV -->
 <nav class="page-nav">
   <div class="nav-inner">
-    <a href="#functionality" class="nav-item">Platform</a>
-    <a href="#mobile-current" class="nav-item">Mobile App</a>
-    <a href="#mobile-future" class="nav-item">Mobile Roadmap</a>
-    <a href="#roadmap" class="nav-item">Coming Soon</a>
-    <a href="#ai" class="nav-item">AI</a>
-    <a href="#feedback" class="nav-item">Feedback</a>
+    <button class="nav-item" onclick="navTo('functionality')">Platform</button>
+    <button class="nav-item" onclick="navTo('mobile-current')">Mobile App</button>
+    <button class="nav-item" onclick="navTo('mobile-future')">Mobile Roadmap</button>
+    <button class="nav-item" onclick="navTo('roadmap')">Coming Soon</button>
+    <button class="nav-item" onclick="navTo('ai')">AI</button>
+    <button class="nav-item" onclick="navTo('feedback')">Feedback</button>
   </div>
 </nav>
 
@@ -1071,7 +1111,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navItems.forEach(i => i.classList.remove('active'));
-        const match = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+        const match = document.querySelector(`.nav-item[onclick="navTo('${entry.target.id}')"]`);
         if (match) match.classList.add('active');
       }
     });
@@ -1152,6 +1192,46 @@
     }, 500);
   });
 
+
+  function navTo(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const nav = document.querySelector('.page-nav');
+    const offset = nav ? nav.offsetHeight + 16 : 60;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    // Update active state
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelector(`.nav-item[onclick="navTo('${id}')"]`)?.classList.add('active');
+    // Update URL without reloading - makes section URL shareable
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('section', id);
+      history.pushState(null, '', url.toString());
+    } catch(e) {}
+  }
+
+  // On load - read ?section= and scroll to it after content settles
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get('section');
+    if (!section) return;
+    var lastHeight = 0;
+    var stable = 0;
+    var poll = setInterval(function() {
+      var h = document.body.scrollHeight;
+      if (h > 0 && h === lastHeight) {
+        stable++;
+        if (stable >= 3) {
+          clearInterval(poll);
+          navTo(section);
+        }
+      } else {
+        lastHeight = h;
+        stable = 0;
+      }
+    }, 250);
+  })();
 </script>
 </body>
 </html>
