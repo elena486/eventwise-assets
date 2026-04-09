@@ -22,7 +22,9 @@
     --mono: 'DM Mono', monospace;
   }
   html { scroll-behavior: smooth; }
-  section[id] { scroll-margin-top: 120px; }
+  :target {
+    scroll-margin-top: 60px;
+  }
   body { font-family: var(--font); background: var(--white); color: var(--navy); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
   /* COVER */
@@ -477,25 +479,7 @@
 
 </style>
   <script async src="https://tally.so/widgets/embed.js">
-  // Anchor scroll offset fix - fires multiple times to catch late-loading content
-  function scrollToHash() {
-    const hash = window.location.hash;
-    if (!hash) return;
-    const target = document.querySelector(hash);
-    if (!target) return;
-    const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
-    const offset = navHeight + 20;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'instant' });
-  }
-  // Fire at multiple points to catch content loading at different times
-  if (window.location.hash) {
-    setTimeout(scrollToHash, 300);
-    setTimeout(scrollToHash, 800);
-    setTimeout(scrollToHash, 1500);
-    setTimeout(scrollToHash, 2500);
-  }
-  window.addEventListener('hashchange', scrollToHash);
+
 
 </script>
 </head>
@@ -560,7 +544,8 @@
 </nav>
 
 <!-- PLATFORM -->
-<section class="functionality" id="functionality">
+<div id="functionality" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="functionality">
   <div class="section-label">The Platform</div>
   <h2 class="section-title">What you have<br>right now</h2>
   <p class="section-intro">While other events businesses are still stitching together spreadsheets and disconnected tools, you're already running on infrastructure that most of the industry hasn't caught up to yet.</p>
@@ -682,7 +667,8 @@
 </section>
 
 <!-- MOBILE NOW -->
-<section class="mobile-section" id="mobile-current">
+<div id="mobile-current" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="mobile-section">
   <div class="section-label">Mobile App</div>
   <h2 class="section-title">Eventwise on the move</h2>
   <p class="section-intro">The Eventwise mobile app gives you on-the-go access to the numbers that matter most, wherever you are on site.</p>
@@ -744,7 +730,8 @@
 </section>
 
 <!-- MOBILE FUTURE -->
-<section class="future-mobile" id="mobile-future">
+<div id="mobile-future" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="future-mobile">
   <div class="section-label">Mobile Roadmap</div>
   <h2 class="section-title">Where the app is going</h2>
   <p class="section-intro">The mobile experience is expanding significantly in 2026. Here's what's coming.</p>
@@ -797,7 +784,8 @@
 </section>
 
 <!-- COMING SOON -->
-<section class="roadmap-section" id="roadmap">
+<div id="roadmap" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="roadmap-section">
   <div class="section-label">Shipping Soon</div>
   <h2 class="section-title">The gap is<br>getting wider</h2>
   <p class="section-intro">While competitors are playing catch-up on the basics, here's what we're shipping in the next 90 days — features that will deepen the advantage you already have.</p>
@@ -873,7 +861,8 @@
 </section>
 
 <!-- AI -->
-<section class="ai-section" id="ai">
+<div id="ai" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="ai-section">
   <div class="section-label">AI</div>
   <h2 class="section-title">This is where<br>everything changes</h2>
   <p class="section-intro">Excel-based AI and generic tools like ChatGPT work on data you manually feed them. They don't know your events. They don't know your suppliers, your approval patterns, your ticket velocity, or your historical P&L. Eventwise AI will.</p>
@@ -1010,7 +999,8 @@
 
 
 <!-- NPS -->
-<section class="nps-section" id="feedback">
+<div id="feedback" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
+<section class="nps-section">
   <div class="section-label">How are we doing?</div>
   <div class="nps-inner reveal">
     <div style="margin-bottom:4px;font-size:22px;font-weight:700;color:var(--navy-deep);letter-spacing:-0.3px;">Your feedback goes directly to Chris and the team</div>
@@ -1080,25 +1070,7 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-  // Anchor scroll offset fix - fires multiple times to catch late-loading content
-  function scrollToHash() {
-    const hash = window.location.hash;
-    if (!hash) return;
-    const target = document.querySelector(hash);
-    if (!target) return;
-    const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
-    const offset = navHeight + 20;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'instant' });
-  }
-  // Fire at multiple points to catch content loading at different times
-  if (window.location.hash) {
-    setTimeout(scrollToHash, 300);
-    setTimeout(scrollToHash, 800);
-    setTimeout(scrollToHash, 1500);
-    setTimeout(scrollToHash, 2500);
-  }
-  window.addEventListener('hashchange', scrollToHash);
+
 
 </script>
 </body>
