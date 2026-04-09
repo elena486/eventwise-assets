@@ -477,21 +477,24 @@
 
 </style>
   <script async src="https://tally.so/widgets/embed.js">
-  // Anchor scroll offset fix
+  // Anchor scroll offset fix - fires multiple times to catch late-loading content
   function scrollToHash() {
     const hash = window.location.hash;
     if (!hash) return;
     const target = document.querySelector(hash);
     if (!target) return;
-    // Small delay to let page fully render first
-    setTimeout(() => {
-      const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
-      const offset = navHeight + 20;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'instant' });
-    }, 100);
+    const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
+    const offset = navHeight + 20;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'instant' });
   }
-  window.addEventListener('load', scrollToHash);
+  // Fire at multiple points to catch content loading at different times
+  if (window.location.hash) {
+    setTimeout(scrollToHash, 300);
+    setTimeout(scrollToHash, 800);
+    setTimeout(scrollToHash, 1500);
+    setTimeout(scrollToHash, 2500);
+  }
   window.addEventListener('hashchange', scrollToHash);
 
 </script>
@@ -1077,21 +1080,24 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-  // Anchor scroll offset fix
+  // Anchor scroll offset fix - fires multiple times to catch late-loading content
   function scrollToHash() {
     const hash = window.location.hash;
     if (!hash) return;
     const target = document.querySelector(hash);
     if (!target) return;
-    // Small delay to let page fully render first
-    setTimeout(() => {
-      const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
-      const offset = navHeight + 20;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'instant' });
-    }, 100);
+    const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
+    const offset = navHeight + 20;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'instant' });
   }
-  window.addEventListener('load', scrollToHash);
+  // Fire at multiple points to catch content loading at different times
+  if (window.location.hash) {
+    setTimeout(scrollToHash, 300);
+    setTimeout(scrollToHash, 800);
+    setTimeout(scrollToHash, 1500);
+    setTimeout(scrollToHash, 2500);
+  }
   window.addEventListener('hashchange', scrollToHash);
 
 </script>
