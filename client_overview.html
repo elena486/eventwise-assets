@@ -476,7 +476,25 @@
   }
 
 </style>
-  <script async src="https://tally.so/widgets/embed.js"></script>
+  <script async src="https://tally.so/widgets/embed.js">
+  // Anchor scroll offset fix
+  function scrollToHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const target = document.querySelector(hash);
+    if (!target) return;
+    // Small delay to let page fully render first
+    setTimeout(() => {
+      const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
+      const offset = navHeight + 20;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'instant' });
+    }, 100);
+  }
+  window.addEventListener('load', scrollToHash);
+  window.addEventListener('hashchange', scrollToHash);
+
+</script>
 </head>
 <body>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#1D9E75,#8403C5);z-index:9999;transition:width 0.1s linear;border-radius:0 2px 2px 0;"></div>
@@ -1058,6 +1076,24 @@
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+  // Anchor scroll offset fix
+  function scrollToHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const target = document.querySelector(hash);
+    if (!target) return;
+    // Small delay to let page fully render first
+    setTimeout(() => {
+      const navHeight = document.querySelector('.page-nav') ? document.querySelector('.page-nav').offsetHeight : 0;
+      const offset = navHeight + 20;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'instant' });
+    }, 100);
+  }
+  window.addEventListener('load', scrollToHash);
+  window.addEventListener('hashchange', scrollToHash);
+
 </script>
 </body>
 </html>
