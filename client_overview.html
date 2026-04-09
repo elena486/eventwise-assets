@@ -22,9 +22,7 @@
     --mono: 'DM Mono', monospace;
   }
   html { scroll-behavior: smooth; }
-  :target {
-    scroll-margin-top: 60px;
-  }
+  
   body { font-family: var(--font); background: var(--white); color: var(--navy); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
   /* COVER */
@@ -481,6 +479,24 @@
   <script async src="https://tally.so/widgets/embed.js">
 
 
+
+  // Section scroll via query param - more reliable than hash in iframes
+  function scrollToSection() {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get('section');
+    if (!section) return;
+    const target = document.getElementById(section);
+    if (!target) return;
+    const nav = document.querySelector('.page-nav');
+    const offset = nav ? nav.offsetHeight + 16 : 60;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'instant' });
+  }
+  // Run after full page load including images
+  window.addEventListener('load', function() {
+    setTimeout(scrollToSection, 200);
+  });
+
 </script>
 </head>
 <body>
@@ -544,7 +560,6 @@
 </nav>
 
 <!-- PLATFORM -->
-<div id="functionality" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="functionality">
   <div class="section-label">The Platform</div>
   <h2 class="section-title">What you have<br>right now</h2>
@@ -667,7 +682,6 @@
 </section>
 
 <!-- MOBILE NOW -->
-<div id="mobile-current" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="mobile-section">
   <div class="section-label">Mobile App</div>
   <h2 class="section-title">Eventwise on the move</h2>
@@ -730,7 +744,6 @@
 </section>
 
 <!-- MOBILE FUTURE -->
-<div id="mobile-future" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="future-mobile">
   <div class="section-label">Mobile Roadmap</div>
   <h2 class="section-title">Where the app is going</h2>
@@ -784,7 +797,6 @@
 </section>
 
 <!-- COMING SOON -->
-<div id="roadmap" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="roadmap-section">
   <div class="section-label">Shipping Soon</div>
   <h2 class="section-title">The gap is<br>getting wider</h2>
@@ -861,7 +873,6 @@
 </section>
 
 <!-- AI -->
-<div id="ai" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="ai-section">
   <div class="section-label">AI</div>
   <h2 class="section-title">This is where<br>everything changes</h2>
@@ -999,7 +1010,6 @@
 
 
 <!-- NPS -->
-<div id="feedback" style="position:relative;top:-60px;visibility:hidden;pointer-events:none;"></div>
 <section class="nps-section">
   <div class="section-label">How are we doing?</div>
   <div class="nps-inner reveal">
@@ -1071,6 +1081,24 @@
   document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
 
+
+
+  // Section scroll via query param - more reliable than hash in iframes
+  function scrollToSection() {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get('section');
+    if (!section) return;
+    const target = document.getElementById(section);
+    if (!target) return;
+    const nav = document.querySelector('.page-nav');
+    const offset = nav ? nav.offsetHeight + 16 : 60;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'instant' });
+  }
+  // Run after full page load including images
+  window.addEventListener('load', function() {
+    setTimeout(scrollToSection, 200);
+  });
 
 </script>
 </body>
