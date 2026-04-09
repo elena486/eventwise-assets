@@ -480,21 +480,47 @@
 
 
 
-  // Section scroll via query param - more reliable than hash in iframes
-  function scrollToSection() {
+  // Scroll to section - reads both ?section= param and #hash
+  // Polls until page height stabilises (images loaded) then scrolls
+  function getTarget() {
     const params = new URLSearchParams(window.location.search);
-    const section = params.get('section');
-    if (!section) return;
-    const target = document.getElementById(section);
+    const section = params.get('section') || window.location.hash.replace('#','');
+    if (!section) return null;
+    return document.getElementById(section);
+  }
+
+  function doScroll(target) {
     if (!target) return;
     const nav = document.querySelector('.page-nav');
     const offset = nav ? nav.offsetHeight + 16 : 60;
     const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: top, behavior: 'instant' });
   }
-  // Run after full page load including images
+
+  // Poll page height - once it stops growing, scroll
+  var lastHeight = 0;
+  var sameCount = 0;
+  var pollInterval = setInterval(function() {
+    var h = document.body.scrollHeight;
+    if (h === lastHeight) {
+      sameCount++;
+      if (sameCount >= 3) {
+        clearInterval(pollInterval);
+        var target = getTarget();
+        if (target) doScroll(target);
+      }
+    } else {
+      lastHeight = h;
+      sameCount = 0;
+    }
+  }, 200);
+
+  // Also fire immediately after load as backup
   window.addEventListener('load', function() {
-    setTimeout(scrollToSection, 200);
+    setTimeout(function() {
+      var target = getTarget();
+      if (target) doScroll(target);
+    }, 500);
   });
 
 </script>
@@ -1083,21 +1109,47 @@
 
 
 
-  // Section scroll via query param - more reliable than hash in iframes
-  function scrollToSection() {
+  // Scroll to section - reads both ?section= param and #hash
+  // Polls until page height stabilises (images loaded) then scrolls
+  function getTarget() {
     const params = new URLSearchParams(window.location.search);
-    const section = params.get('section');
-    if (!section) return;
-    const target = document.getElementById(section);
+    const section = params.get('section') || window.location.hash.replace('#','');
+    if (!section) return null;
+    return document.getElementById(section);
+  }
+
+  function doScroll(target) {
     if (!target) return;
     const nav = document.querySelector('.page-nav');
     const offset = nav ? nav.offsetHeight + 16 : 60;
     const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: top, behavior: 'instant' });
   }
-  // Run after full page load including images
+
+  // Poll page height - once it stops growing, scroll
+  var lastHeight = 0;
+  var sameCount = 0;
+  var pollInterval = setInterval(function() {
+    var h = document.body.scrollHeight;
+    if (h === lastHeight) {
+      sameCount++;
+      if (sameCount >= 3) {
+        clearInterval(pollInterval);
+        var target = getTarget();
+        if (target) doScroll(target);
+      }
+    } else {
+      lastHeight = h;
+      sameCount = 0;
+    }
+  }, 200);
+
+  // Also fire immediately after load as backup
   window.addEventListener('load', function() {
-    setTimeout(scrollToSection, 200);
+    setTimeout(function() {
+      var target = getTarget();
+      if (target) doScroll(target);
+    }, 500);
   });
 
 </script>
