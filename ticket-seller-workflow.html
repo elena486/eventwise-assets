@@ -512,6 +512,54 @@ section { padding: 92px 72px; }
   color: rgba(255,255,255,0.62);
 }
 </style>
+<!-- GA4 Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-13S24S7W8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-13S24S7W8N", { page_title: document.title, page_location: window.location.href });
+
+  var scrollMarks = {25: false, 50: false, 75: false, 100: false};
+  window.addEventListener("scroll", function() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    var pct = Math.round((scrollTop / docHeight) * 100);
+    [25, 50, 75, 100].forEach(function(mark) {
+      if (pct >= mark && !scrollMarks[mark]) {
+        scrollMarks[mark] = true;
+        gtag("event", "scroll_depth", { depth_percentage: mark, page_title: document.title });
+      }
+    });
+  });
+
+  document.addEventListener("click", function(e) {
+    var el = e.target.closest("a, button");
+    if (!el) return;
+    var text = (el.innerText || el.textContent || "").trim().substring(0, 50);
+    var href = el.href || "";
+    if (href.startsWith("tel:")) {
+      gtag("event", "phone_click", { phone_number: href.replace("tel:", ""), page_title: document.title });
+    } else if (href.startsWith("mailto:")) {
+      gtag("event", "email_click", { email: href.replace("mailto:", ""), page_title: document.title });
+    } else if (text.toLowerCase().includes("book a demo") || text.toLowerCase().includes("book demo")) {
+      gtag("event", "cta_click", { cta_text: text, cta_type: "book_demo", page_title: document.title });
+    } else if (text.toLowerCase().includes("see it in action")) {
+      gtag("event", "cta_click", { cta_text: text, cta_type: "see_in_action", page_title: document.title });
+    } else if (el.closest("nav")) {
+      gtag("event", "nav_click", { nav_item: text, page_title: document.title });
+    } else if (text) {
+      gtag("event", "link_click", { link_text: text, link_url: href, page_title: document.title });
+    }
+  });
+
+  [30, 60, 120].forEach(function(secs) {
+    setTimeout(function() {
+      gtag("event", "time_on_page", { seconds: secs, page_title: document.title });
+    }, secs * 1000);
+  });
+</script>
 </head>
 <body>
 <div id="progress-bar"></div>
