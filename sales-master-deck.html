@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- 
+  ============================================================
+  Code authored by George Nell
+  Ownership of this code belongs to George Nell
+  Content ownership belongs to Eventwise
+  Unauthorised reproduction of either is prohibited
+  ============================================================
+-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introducing Eventwise - Financial Clarity for Every Event</title>
@@ -23,6 +31,34 @@ body { font-family: var(--font); background: var(--white); color: var(--navy); o
   z-index: 9999; transition: width 0.1s linear;
   border-radius: 0 2px 2px 0;
 }
+
+/* PROBLEM HEADER NAV */
+.problem-nav {
+  position: sticky; top: 0; z-index: 900;
+  background: rgba(246,246,251,0.96);
+  border-bottom: 1px solid var(--grey);
+  backdrop-filter: blur(10px);
+}
+.problem-nav-inner {
+  display: flex; align-items: center;
+  overflow-x: auto; scrollbar-width: none;
+  padding: 0 60px;
+}
+.problem-nav-inner::-webkit-scrollbar { display: none; }
+.problem-nav-item {
+  flex-shrink: 0;
+  padding: 15px 16px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  color: var(--grey-dark); text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.problem-nav-item:hover, .problem-nav-item.active {
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+section[id] { scroll-margin-top: 95px; }
 
 /* SCROLL ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -61,10 +97,10 @@ body { font-family: var(--font); background: var(--white); color: var(--navy); o
   clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
   pointer-events: none;
 }
-.hero-logo { z-index: 2; margin-bottom: 80px; animation: fade-down 0.7s ease forwards; }
+.hero-logo { z-index: 2; margin-bottom: 56px; animation: fade-down 0.7s ease forwards; }
 .hero-logo img { height: 36px; width: auto; }
 @keyframes fade-down { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-.hero-main { z-index: 2; display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 64px; }
+.hero-main { z-index: 2; display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 48px; }
 .hero-text { flex: 0 0 44%; display: flex; flex-direction: column; gap: 0; }
 .hero-eyebrow {
   font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
@@ -79,7 +115,7 @@ body { font-family: var(--font); background: var(--white); color: var(--navy); o
 .hero-title strong { font-weight: 700; }
 .hero-sub {
   font-size: 17px; color: rgba(255,255,255,0.42); line-height: 1.8;
-  max-width: 400px; margin-bottom: 48px;
+  max-width: 440px; margin-bottom: 36px;
   opacity: 0; animation: fade-up 0.7s 0.42s ease forwards;
 }
 .hero-btns {
@@ -119,7 +155,7 @@ body { font-family: var(--font); background: var(--white); color: var(--navy); o
 @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* SECTIONS */
-section { padding: 100px 72px; }
+section { padding: 108px 72px; }
 .section-tag {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 11px; font-weight: 600; letter-spacing: 2px;
@@ -252,6 +288,10 @@ section { padding: 100px 72px; }
 .why-highlight .why-card-title { color: var(--white); font-size: 22px; }
 .why-highlight .why-card-text { color: rgba(255,255,255,0.42); }
 .why-highlight:hover { border-color: transparent; box-shadow: none; transform: none; }
+.why-footnote {
+  margin-top: 20px; font-size: 13px; line-height: 1.6;
+  color: var(--grey-mid); max-width: 720px;
+}
 
 /* COMPARISON */
 .comparison { background: var(--navy-deep); }
@@ -284,7 +324,7 @@ section { padding: 100px 72px; }
 .testimonials .section-tag { color: var(--purple); }
 .testimonials .section-tag::before { background: var(--purple); }
 .testimonials-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
 .testimonial-card {
   background: var(--white); border: 1px solid var(--grey);
@@ -391,6 +431,9 @@ section { padding: 100px 72px; }
   transition: border-color 0.2s, background 0.2s, transform 0.2s;
 }
 .final-cta-btn:hover { border-color: var(--white); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+.final-cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; z-index: 1; }
+.final-cta-btn.primary { background: var(--purple); border-color: transparent; box-shadow: 0 18px 46px rgba(132,3,197,0.35); }
+.final-cta-btn.primary:hover { background: #7a02b8; border-color: transparent; }
 
 /* RESPONSIVE */
 @media (max-width: 960px) {
@@ -407,9 +450,12 @@ section { padding: 100px 72px; }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .stat-item:last-child { border-bottom: none; }
   .pricing-inner { padding: 48px 32px; }
+  .problem-nav-inner { padding: 0 28px; }
 }
 @media (max-width: 600px) {
   .steps-grid, .platform-grid { grid-template-columns: 1fr; }
+  .problem-nav-inner { padding: 0 20px; }
+  .problem-nav-item { padding: 12px 10px; }
 }
 
 /* FEATURE SHOWCASE */
@@ -419,14 +465,13 @@ section { padding: 100px 72px; }
 .features .section-title { color: var(--white); }
 .features .section-sub { color: rgba(255,255,255,0.38); margin-bottom: 0; }
 .feature-block {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
   align-items: center; padding: 64px 0;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .feature-block:last-child { border-bottom: none; }
 .feature-block.reverse { direction: rtl; }
 .feature-block.reverse > * { direction: ltr; }
-.feature-text { }
 .feature-label {
   font-size: 11px; font-weight: 600; letter-spacing: 2px;
   text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
@@ -511,7 +556,69 @@ section { padding: 100px 72px; }
   .feature-block { grid-template-columns: 1fr; gap: 32px; }
   .feature-block.reverse { direction: ltr; }
 }
+/* QA polish: logo rendering + readability contrast */
+.hero-logo img,
+.footer-logo img,
+.header-logo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.hero-subtitle,
+.section-subtitle,
+.proof-text {
+  color: rgba(255,255,255,0.64);
+}
 </style>
+<!-- GA4 Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-13S24S7W8N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-13S24S7W8N", { page_title: document.title, page_location: window.location.href });
+
+  var scrollMarks = {25: false, 50: false, 75: false, 100: false};
+  window.addEventListener("scroll", function() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    var pct = Math.round((scrollTop / docHeight) * 100);
+    [25, 50, 75, 100].forEach(function(mark) {
+      if (pct >= mark && !scrollMarks[mark]) {
+        scrollMarks[mark] = true;
+        gtag("event", "scroll_depth", { depth_percentage: mark, page_title: document.title });
+      }
+    });
+  });
+
+  document.addEventListener("click", function(e) {
+    var el = e.target.closest("a, button");
+    if (!el) return;
+    var text = (el.innerText || el.textContent || "").trim().substring(0, 50);
+    var href = el.href || "";
+    if (href.startsWith("tel:")) {
+      gtag("event", "phone_click", { phone_number: href.replace("tel:", ""), page_title: document.title });
+    } else if (href.startsWith("mailto:")) {
+      gtag("event", "email_click", { email: href.replace("mailto:", ""), page_title: document.title });
+    } else if (text.toLowerCase().includes("book a demo") || text.toLowerCase().includes("book demo")) {
+      gtag("event", "cta_click", { cta_text: text, cta_type: "book_demo", page_title: document.title });
+    } else if (text.toLowerCase().includes("see it in action")) {
+      gtag("event", "cta_click", { cta_text: text, cta_type: "see_in_action", page_title: document.title });
+    } else if (el.closest("nav")) {
+      gtag("event", "nav_click", { nav_item: text, page_title: document.title });
+    } else if (text) {
+      gtag("event", "link_click", { link_text: text, link_url: href, page_title: document.title });
+    }
+  });
+
+  [30, 60, 120].forEach(function(secs) {
+    setTimeout(function() {
+      gtag("event", "time_on_page", { seconds: secs, page_title: document.title });
+    }, secs * 1000);
+  });
+</script>
 </head>
 <body>
 
@@ -529,7 +636,7 @@ section { padding: 100px 72px; }
       <h1 class="hero-title">The software <strong>streamlining</strong> your event's financial management</h1>
       <p class="hero-sub">From budgets to real-time P&amp;L - everything your event finance team needs, in one platform.</p>
       <div class="hero-btns">
-        <a href="https://eventwise.com/book-demo" class="btn-primary">Book a Demo &rarr;</a>
+        <a href="https://app.usemotion.com/meet/chris-carter-fk56/meeting?d=30" class="btn-primary">Book a Demo &rarr;</a>
         <a href="https://eventwise.com" class="btn-ghost">eventwise.com &nearr;</a>
       </div>
     </div>
@@ -539,8 +646,20 @@ section { padding: 100px 72px; }
   </div>
 </section>
 
+<nav class="problem-nav">
+  <div class="problem-nav-inner">
+    <a href="#the-problem" class="problem-nav-item">The Problem</a>
+    <a href="#the-platform" class="problem-nav-item">The Platform</a>
+    <a href="#why-eventwise" class="problem-nav-item">Why Eventwise</a>
+    <a href="#platform-deep-dive" class="problem-nav-item">Platform Deep Dive</a>
+    <a href="#competitive-edge" class="problem-nav-item">Competitive Edge</a>
+    <a href="#what-our-clients-say" class="problem-nav-item">What our clients say</a>
+    <a href="#next-steps" class="problem-nav-item">Next Steps</a>
+  </div>
+</nav>
+
 <!-- PROBLEM -->
-<section class="problem">
+<section class="problem" id="the-problem">
   <div class="section-tag reveal">The Problem</div>
   <h2 class="section-title reveal">Events &amp; Festivals have long struggled with...</h2>
   <p class="section-sub reveal">The average event runs on a patchwork of spreadsheets and disconnected tools. There's a better way.</p>
@@ -564,42 +683,42 @@ section { padding: 100px 72px; }
   </div>
 
   <div class="problems-grid">
-    <div class="problem-card reveal reveal-delay-1">
+    <div class="problem-card reveal reveal-delay-1" id="operational-overload">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
       </div>
       <div class="problem-card-title">Operational Overload</div>
       <div class="problem-card-text">Time-consuming manual reconciliations and juggling multiple platforms simultaneously.</div>
     </div>
-    <div class="problem-card reveal reveal-delay-2">
+    <div class="problem-card reveal reveal-delay-2" id="revenue-hurdles">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
       </div>
       <div class="problem-card-title">Revenue Hurdles</div>
       <div class="problem-card-text">Complex ticket revenue tracking across diverse streams from multiple vendors.</div>
     </div>
-    <div class="problem-card reveal reveal-delay-3">
+    <div class="problem-card reveal reveal-delay-3" id="expense-puzzles">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
       <div class="problem-card-title">Expense Puzzles</div>
       <div class="problem-card-text">Unpredictable and varied costs, multi-event budget intricacies with no single view.</div>
     </div>
-    <div class="problem-card reveal reveal-delay-1">
+    <div class="problem-card reveal reveal-delay-1" id="planning-projections">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
       </div>
       <div class="problem-card-title">Planning &amp; Projections</div>
       <div class="problem-card-text">Challenging forecasts and scenario planning without the right tools in place.</div>
     </div>
-    <div class="problem-card reveal reveal-delay-2">
+    <div class="problem-card reveal reveal-delay-2" id="legacy-limitations">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
       </div>
       <div class="problem-card-title">Legacy Limitations</div>
       <div class="problem-card-text">The never-ending maze of Excel spreadsheets that no one can maintain cleanly.</div>
     </div>
-    <div class="problem-card problem-solve reveal reveal-delay-3">
+    <div class="problem-card problem-solve reveal reveal-delay-3" id="eventwise-solution">
       <div class="problem-card-icon">
         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
@@ -622,7 +741,7 @@ section { padding: 100px 72px; }
 </section>
 
 <!-- PLATFORM -->
-<section class="platform">
+<section class="platform" id="the-platform">
   <div class="section-tag reveal">The Platform</div>
   <h2 class="section-title reveal">The all-in-one solution for event financial management</h2>
   <p class="section-sub reveal">From creating your budget to tracking spend and analysing event data - our platform covers the full financial cycle.</p>
@@ -671,6 +790,7 @@ section { padding: 100px 72px; }
   <div class="integrations-row reveal">
     <span class="integrations-label">Integrates with</span>
     <span class="integration-pill"><span class="integration-dot" style="background:#13B5EA"></span>Xero</span>
+    <span class="integration-pill"><span class="integration-dot" style="background:#E35205"></span>Acumatica</span>
     <span class="integration-pill"><span class="integration-dot" style="background:#F05537"></span>Eventbrite</span>
     <span class="integration-pill"><span class="integration-dot" style="background:#1DB954"></span>Skiddle</span>
     <span class="integration-pill"><span class="integration-dot" style="background:#002A5C"></span>Ticketmaster</span>
@@ -680,7 +800,7 @@ section { padding: 100px 72px; }
 </section>
 
 <!-- WHY -->
-<section class="why">
+<section class="why" id="why-eventwise">
   <div class="section-tag reveal">Why Eventwise</div>
   <h2 class="section-title reveal">Built to save time and make every event more profitable</h2>
   <div class="why-grid">
@@ -714,11 +834,12 @@ section { padding: 100px 72px; }
       <div class="why-card-text">Reduce accounting headcount, workload and cost - built to save you time and ultimately make sure your event can be as profitable as possible.</div>
     </div>
   </div>
+  <p class="why-footnote reveal">* Based on average admin time saved across Eventwise customers compared with spreadsheet-based event finance workflows.</p>
 </section>
 
 
 <!-- FEATURE SHOWCASE -->
-<section class="features">
+<section class="features" id="platform-deep-dive">
   <div class="section-tag reveal">Platform Deep Dive</div>
   <h2 class="section-title reveal">See the platform in action</h2>
   <p class="section-sub reveal">Real product, real data. Here's what your team will actually use every day.</p>
@@ -873,7 +994,7 @@ section { padding: 100px 72px; }
 
 
 <!-- COMPARISON -->
-<section class="comparison">
+<section class="comparison" id="competitive-edge">
   <div class="section-tag reveal">Competitive Edge</div>
   <h2 class="section-title reveal" style="color:var(--white); margin-bottom: 48px;">Other event finance solutions fall short</h2>
   <table class="comp-table reveal">
@@ -897,38 +1018,28 @@ section { padding: 100px 72px; }
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials">
+<section class="testimonials" id="what-our-clients-say">
   <div class="section-tag reveal">What our clients say</div>
   <h2 class="section-title reveal">Trusted by the best events and festivals</h2>
   <p class="section-sub reveal">From boutique festivals to major promoters - here's what they say about Eventwise.</p>
   <div class="testimonials-grid">
     <div class="testimonial-card reveal reveal-delay-1">
-      <p class="testimonial-quote">In the world of music festivals, Eventwise stands out as the ultimate solution we've been searching for. Its interactive features and robust budget tools promise to elevate our planning process. Excited to see the positive impact on our next event!</p>
+      <p class="testimonial-quote">Eventwise is exactly what our music festival needed. Its interactive features and budget tools transform our planning, helping us stay on budget, catch issues early, and make confident decisions throughout the event lifecycle.</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar">G</div>
+        <div class="testimonial-avatar">F</div>
         <div>
-          <div class="testimonial-name">Director</div>
-          <div class="testimonial-role">Gottwood Festival</div>
+          <div class="testimonial-name">Fred Letts</div>
+          <div class="testimonial-role">Director, Gottwood Festival</div>
         </div>
       </div>
     </div>
     <div class="testimonial-card reveal reveal-delay-2">
-      <p class="testimonial-quote">Planning our unique festival is a monumental task, and we needed a robust financial management solution to be up to the challenge. Eventwise caught our attention with its advanced features. We are managing to run our different areas of the festival knowing where we need to reduce costs if needed.</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">B</div>
-        <div>
-          <div class="testimonial-name">Director</div>
-          <div class="testimonial-role">Brighton Pride</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card reveal reveal-delay-3">
-      <p class="testimonial-quote">Eventwise simplifies complex budgeting, reduces data inaccuracies and provides financial stability for your event. It's transformed how we manage our operations across multiple events.</p>
+      <p class="testimonial-quote">Everything we need in one platform — spend, income, POs, reconciliation. It removes a huge amount of manual work and gives real confidence in your event finances. The support team has been excellent throughout.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">E</div>
         <div>
-          <div class="testimonial-name">Festival Director</div>
-          <div class="testimonial-role">Eventwise Client</div>
+          <div class="testimonial-name">Eleri Hayhurst</div>
+          <div class="testimonial-role">AIF (Association of Independent Festivals)</div>
         </div>
       </div>
     </div>
@@ -941,12 +1052,12 @@ section { padding: 100px 72px; }
     <div class="pricing-eyebrow">Pricing</div>
     <h2 class="pricing-title">Transparent, straightforward pricing.</h2>
     <p class="pricing-sub">No hidden fees. No long-term lock-ins. Just a platform built to grow with your events business.</p>
-    <a href="https://eventwise.com/pricing" class="pricing-btn">View Pricing &rarr;</a>
+    <a href="https://www.eventwise.com/#pricing" class="pricing-btn">View Pricing &rarr;</a>
   </div>
 </section>
 
 <!-- NEXT STEPS -->
-<section class="steps">
+<section class="steps" id="next-steps">
   <div class="section-tag reveal">Next Steps</div>
   <h2 class="section-title reveal">Getting started is simple</h2>
   <p class="section-sub reveal">From your first demo to going live - we're with you every step of the way.</p>
@@ -977,7 +1088,7 @@ section { padding: 100px 72px; }
     </div>
   </div>
   <div class="steps-cta reveal">
-    <a href="https://eventwise.com/book-demo" class="btn-primary" style="font-size:16px; padding: 16px 40px;">Schedule a Meeting &rarr;</a>
+    <a href="https://app.usemotion.com/meet/chris-carter-fk56/meeting?d=30" class="btn-primary" style="font-size:16px; padding: 16px 40px;">Schedule a Meeting &rarr;</a>
   </div>
 </section>
 
@@ -986,7 +1097,10 @@ section { padding: 100px 72px; }
   <div class="final-cta-bg"></div>
   <h2 class="final-cta-title reveal">Ready to bring <span>clarity</span><br>to every event?</h2>
   <p class="final-cta-sub reveal">Join the events and festivals already running smarter with Eventwise.</p>
-  <a href="https://eventwise.com/book-demo" class="final-cta-btn reveal">Book a Demo &rarr;</a>
+  <div class="final-cta-actions">
+    <a href="https://app.usemotion.com/meet/chris-carter-fk56/meeting?d=30" class="final-cta-btn primary reveal">Book a Demo &rarr;</a>
+    <a href="https://app.usemotion.com/meet/chris-carter-fk56/meeting?d=30" class="final-cta-btn reveal">See It in Action</a>
+  </div>
 </section>
 
 <script>
@@ -1002,6 +1116,18 @@ const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Ensure logo links to homepage, even when embedded as a single long base64 line.
+(() => {
+  const img = document.querySelector('.hero-logo img');
+  if (!img) return;
+  if (img.closest('a')) return;
+  const a = document.createElement('a');
+  a.href = '/';
+  a.setAttribute('aria-label', 'Eventwise homepage');
+  img.parentNode.insertBefore(a, img);
+  a.appendChild(img);
+})();
 
 // Counter animation
 const counterObs = new IntersectionObserver((entries) => {
@@ -1024,6 +1150,139 @@ const counterObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+// Problem header deep-link navigation
+const problemNavItems = document.querySelectorAll('.problem-nav-item');
+const problemTargets = document.querySelectorAll('section[id]');
+
+function scrollToHashTarget(behavior = 'smooth') {
+  const id = window.location.hash.replace('#', '');
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  const nav = document.querySelector('.problem-nav');
+  const offset = nav ? nav.offsetHeight + 16 : 60;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior });
+}
+
+problemNavItems.forEach(item => {
+  item.addEventListener('click', () => {
+    problemNavItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+const problemNavObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    problemNavItems.forEach(i => i.classList.remove('active'));
+    const match = document.querySelector('.problem-nav-item[href="#' + entry.target.id + '"]');
+    if (match) match.classList.add('active');
+  });
+}, { rootMargin: '-35% 0px -55% 0px' });
+problemTargets.forEach(target => problemNavObs.observe(target));
+
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    setTimeout(() => scrollToHashTarget('instant'), 250);
+  }
+});
+window.addEventListener('hashchange', () => scrollToHashTarget('smooth'));
+</script>
+<script>
+(() => {
+  const brandLogo = 'https://stlvckwpnwczfeiklcub.supabase.co/storage/v1/object/public/GEORGE/Logo_w%20(1).png';
+  const brandHome = 'https://www.eventwise.com/';
+  const featuresUrl = 'https://www.eventwise.com/features';
+
+  document.querySelectorAll('a').forEach((link) => {
+    if (link.textContent.trim().toLowerCase() === 'see it in action') {
+      link.href = featuresUrl;
+    }
+  });
+
+  const targets = document.querySelectorAll('.hero-logo, .header-logo, .footer-logo, .ew-topnav-logo, .deck-nav-logo, .feature-nav-logo');
+  targets.forEach((node) => {
+    let anchor = node.tagName === 'A' ? node : node.closest('a');
+    if (!anchor) {
+      anchor = document.createElement('a');
+      anchor.className = node.className;
+      node.className = '';
+      node.parentNode.insertBefore(anchor, node);
+      anchor.appendChild(node);
+    }
+    anchor.href = brandHome;
+
+    let img = node.querySelector('img');
+    if (!img) {
+      const svg = node.querySelector('svg');
+      if (svg) svg.remove();
+      img = document.createElement('img');
+      node.appendChild(img);
+    }
+    img.src = brandLogo;
+    img.alt = 'Eventwise logo';
+    img.loading = 'eager';
+    img.decoding = 'async';
+  });
+
+  if (!document.getElementById('ew-hover-flip-style')) {
+    const style = document.createElement('style');
+    style.id = 'ew-hover-flip-style';
+    style.textContent = `
+      a[class*="btn"], .ew-btn, .cta-btn, .final-cta-btn, .btn-primary, .btn-secondary {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        transition: transform 0.45s ease, box-shadow 0.25s ease;
+      }
+      a[class*="btn"]:hover, .ew-btn:hover, .cta-btn:hover, .final-cta-btn:hover, .btn-primary:hover, .btn-secondary:hover {
+        transform: perspective(700px) rotateY(-11deg);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
+</script>
+<script>
+(() => {
+  const brandHome = 'https://www.eventwise.com/';
+  const pricingUrl = 'https://www.eventwise.com/#pricing';
+
+  const logoTargets = document.querySelectorAll('.cover-logo, .hero-logo, .header-logo, .footer-logo, .ew-topnav-logo, .deck-nav-logo, .feature-nav-logo');
+  logoTargets.forEach((node) => {
+    const anchor = node.tagName === 'A' ? node : node.closest('a');
+    if (anchor) {
+      anchor.href = brandHome;
+      return;
+    }
+
+    node.style.cursor = 'pointer';
+    node.setAttribute('role', 'link');
+    if (!node.hasAttribute('tabindex')) node.tabIndex = 0;
+    node.addEventListener('click', () => { window.location.href = brandHome; });
+    node.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        window.location.href = brandHome;
+      }
+    });
+  });
+
+  document.querySelectorAll('a').forEach((link) => {
+    const text = link.textContent.trim().toLowerCase();
+    if (text.includes('pricing') || link.classList.contains('pricing-btn') || /\/pricing\/?$/i.test(link.href)) {
+      link.href = pricingUrl;
+    }
+    const href = link.getAttribute('href') || '';
+    const isExternalCta = /^https?:\/\//i.test(href) && !href.startsWith('#');
+    const isCta = link.classList.contains('cta-btn') || link.classList.contains('ew-btn') || link.classList.contains('final-cta-btn') || link.classList.contains('btn-primary') || link.classList.contains('pricing-btn') || /book.*demo|schedule a meeting|see it in action/i.test(text);
+    if (isExternalCta && isCta) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+  });
+})();
 </script>
 </body>
 </html>
